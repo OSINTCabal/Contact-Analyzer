@@ -1,0 +1,22 @@
+.DS_Store
+.coverage
+.contact-analyzer-install
+.idea/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.venv/
+.vscode/
+__pycache__/
+*.db
+*.egg-info/
+*.py[cod]
+*.sqlite
+*.sqlite3
+build/
+codex_cases/
+dist/
+
+# Local browser profiles and generated collection artifacts are sensitive.
+chrome-profile/
+run-output/

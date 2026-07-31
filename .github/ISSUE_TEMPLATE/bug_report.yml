@@ -1,0 +1,48 @@
+name: Bug report
+description: Report a reproducible Contact Analyzer problem
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not attach cookies, tokens, browser profiles, databases, screenshots,
+        HTML, response bodies, or unredacted subject data.
+  - type: input
+    id: version
+    attributes:
+      label: Contact Analyzer version
+      placeholder: "contactanalyzer --version"
+    validations:
+      required: true
+  - type: dropdown
+    id: operating-system
+    attributes:
+      label: Operating system
+      options:
+        - Linux
+        - macOS
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Include redacted steps, expected behavior, and actual behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: doctor
+    attributes:
+      label: Redacted doctor output
+      render: shell
+    validations:
+      required: false
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: I removed credentials, personal data, and private diagnostics.
+          required: true

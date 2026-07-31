@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+LAUNCHER_PATH="${BASH_SOURCE[0]}"
+while [[ -L "$LAUNCHER_PATH" ]]; do
+    LINK_DIR="$(cd -P -- "$(dirname -- "$LAUNCHER_PATH")" && pwd)"
+    LINK_TARGET="$(readlink "$LAUNCHER_PATH")"
+    if [[ "$LINK_TARGET" == /* ]]; then
+        LAUNCHER_PATH="$LINK_TARGET"
+    else
+        LAUNCHER_PATH="$LINK_DIR/$LINK_TARGET"
+    fi
+done
+PROJECT_ROOT="$(cd -P -- "$(dirname -- "$LAUNCHER_PATH")" && pwd)"
+
+if [[ -x "$PROJECT_ROOT/.venv/bin/python" ]]; then
+    CONTACT_ANALYZER_PYTHON="$PROJECT_ROOT/.venv/bin/python"
+elif command -v python3 >/dev/null 2>&1; then
+    CONTACT_ANALYZER_PYTHON="$(command -v python3)"
+else
+    echo "Contact Analyzer requires Python 3.10 or newer." >&2
+    echo "Run ./install.sh from the repository to create the managed environment." >&2
+    exit 1
+fi
+
+cd "$PROJECT_ROOT"
+exec "$CONTACT_ANALYZER_PYTHON" -m contactanalyzer_app "$@"

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["subject_present", "page_assessment", "people"],
+  "properties": {
+    "subject_present": {"type": "boolean"},
+    "page_assessment": {"type": "string"},
+    "people": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "display_name",
+          "role",
+          "organization",
+          "evidence_quote",
+          "canonical_profile_url",
+          "canonical_platform"
+        ],
+        "properties": {
+          "display_name": {"type": "string"},
+          "role": {"type": ["string", "null"]},
+          "organization": {"type": ["string", "null"]},
+          "evidence_quote": {"type": "string"},
+          "canonical_profile_url": {"type": ["string", "null"]},
+          "canonical_platform": {"type": ["string", "null"]}
+        }
+      }
+    }
+  }
+}
