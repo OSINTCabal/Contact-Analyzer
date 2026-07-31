@@ -802,11 +802,12 @@ class CollectorTests(unittest.TestCase):
         self.assertIn("[0]||dialog", THREADS_SCROLL_JS)
         self.assertNotIn("window.scroll", THREADS_SCROLL_JS)
         self.assertIn("scrollX", THREADS_LIST_STATE_JS)
-        self.assertIn("browser_relationship_cursor_not_requested", BrowserCollector._collect_threads_pass.__code__.co_consts)
-        self.assertIn("scroll_event_errors", BrowserCollector._collect_threads_pass.__code__.co_consts)
-        self.assertIn("modal_scoped_dom_scroll", BrowserCollector._collect_threads_pass.__code__.co_consts)
-        self.assertIn("follow_buttons_clicked", BrowserCollector._collect_threads_pass.__code__.co_consts)
-        self.assertIn("navigation_guard_triggered", BrowserCollector._collect_threads_pass.__code__.co_consts)
+        pass_source = inspect.getsource(BrowserCollector._collect_threads_pass)
+        self.assertIn("browser_relationship_cursor_not_requested", pass_source)
+        self.assertIn("scroll_event_errors", pass_source)
+        self.assertIn("modal_scoped_dom_scroll", pass_source)
+        self.assertIn("follow_buttons_clicked", pass_source)
+        self.assertIn("navigation_guard_triggered", pass_source)
 
     def test_threads_private_zero_profile_state_is_explicit(self):
         self.assertIn("this profile is private", THREADS_PROFILE_STATE_JS.casefold())
